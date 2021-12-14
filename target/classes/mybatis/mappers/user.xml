@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sample.jsblog.dao.UserDao">
+	<!--  -->
+	<insert id="insertUser" parameterType="com.sample.jsblog.vo.User">
+		insert into jsblog_user
+		(user_id, user_name, user_password, user_phone, user_email, user_adress, user_gender)
+		
+		values
+		(#{userId},#{userName},#{userPassword},#{userPhone},#{userEmail},#{userAdress},#{gender})
+		
+	</insert>
+	
+	<resultMap id="UserResultMap" type="com.sample.jsblog.vo.User">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_password" property="userPassword"/>
+		<result column="user_phone" property="userPhone"/>
+		<result column="user_email" property="userEmail"/>
+		<result column="user_adress" property="userAdress"/>
+		<result column="user_gender" property="gender"/>
+	</resultMap>
+
+	
+	<select id="getUserId" parameterType="string" resultMap="UserResultMap">
+		select 
+			*
+		from
+			jsblog_user
+		where
+			user_id = #{value}
+	</select>
+	<select id="changeinfogetUserpassowrd" parameterType="com.sample.jsblog.vo.User" resultMap="UserResultMap">
+		select 
+			*
+		from
+			jsblog_user
+		where
+			user_id = #{userId}
+		and
+			user_password = #{userPassword}
+	</select>
+	
+	<select id="getUserEmail" parameterType="string" resultMap="UserResultMap">
+		select
+			*
+		from
+			jsblog_user
+		where
+			user_email = #{value}
+	
+	</select>
+	
+	<update id="updateUserInfo" parameterType="com.sample.jsblog.vo.User">
+		update
+			jsblog_user
+		set
+			user_password = #{userPassword},
+			user_email = #{userEmail},
+			user_adress = #{userAdress}
+		where
+			user_id= #{userId}
+	</update>
+	
+	<delete id="deleteuser" parameterType="string">
+	delete from
+		jsblog_user
+	where
+		user_id = #{value}
+	
+	</delete>
+	
+  	<select id="idCheck" resultType="int">
+ 	
+ 		select
+ 			 count(*) 
+ 		from 
+ 			jsblog_user 
+ 		where 
+ 			user_id = #{userId}
+  	
+  	</select>
+	
+	<select id="usersList" resultType="com.sample.jsblog.vo.User">
+		select user_id userId
+		from jsblog_user
+	</select>
+</mapper>

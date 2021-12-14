@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sample.jsblog.dao.BoardDao">
+
+	<insert id="insertBoardarea" parameterType="com.sample.jsblog.vo.Board">
+		insert into jsblog_board
+		( board_no, board_title, board_area, user_id )
+		values
+		(jsblog_seq.nextval,#{boardTitle},#{boardArea},#{userId})
+	</insert>
+	
+	<select id="getBoardList" resultType="com.sample.jsblog.vo.Board">
+	select 
+			board_no boardNo,
+			board_title boardTitle,
+			board_area boardArea,
+			board_create_day createDate,
+			user_id userId
+	
+	from
+			jsblog_board
+	order by board_no desc
+	</select>
+	
+	<select id="getBoardViewNo" parameterType="string" resultType="com.sample.jsblog.vo.Board">
+		select
+			board_no boardNo,
+			board_title boardTitle,
+			board_area boardArea,
+			board_create_day createDate,
+			user_id userId 
+		from 
+			jsblog_board
+		where
+			board_no = #{value}	
+	</select>
+	
+	<delete id="deleteBoard" parameterType="string">
+		delete from
+			jsblog_board
+		where
+			board_No = #{value}	
+	</delete>
+	
+	<update id="updateBoard" parameterType="com.sample.jsblog.vo.Board">
+		update
+			jsblog_board
+		set
+			board_title= #{boardTitle},
+			board_area = #{boardArea}
+		where	
+			board_no = #{boardNo}
+	</update>
+	
+	<select id="search" parameterType="String" resultType="com.sample.jsblog.vo.Board">
+	select
+			board_no boardNo,
+			board_title boardTitle,
+			board_area boardArea,
+			board_create_day createDate,
+			user_id userId
+	from
+		jsblog_board
+	where
+	 board_title like '${boardTitle}%'
+	</select>
+	
+	<update id="viewCount">
+		update
+			jsblog_board
+		set
+			view_count view_count +1
+		where
+			board_no = #{boardNo}	
+	</update>
+	
+	<select id="selectBoardNo" resultType="com.sample.jsblog.vo.Board">
+		select
+			board_no,
+			view_count
+		from
+			jsblog_board
+		order by boardNo DESC
+	</select>
+</mapper>

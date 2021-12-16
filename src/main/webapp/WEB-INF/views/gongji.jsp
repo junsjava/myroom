@@ -9,6 +9,10 @@
 <script src="https://kit.fontawesome.com/496bb7aab6.js" crossorigin="anonymous"></script>
 <title>JS Blog || 공지사항</title>
 <style type="text/css">
+.container{
+height :100%;
+}
+
 .box{
 display: flex;
 font-style: italic;
@@ -20,9 +24,7 @@ font-weight: bold;
 </head>
 <body>
 <%@ include file="common/header.jsp"%>
-<main>
 <div class="container my-3">
-<div>
 	<h1 style="margin-bottom: 45px; margin-top: 55px;">공지사항</h1>
 	<div class="card" style="border: solid 0px; height: 350px; padding: 8px;">
 		<div class="row" style="margin-bottom: 100px;">
@@ -42,7 +44,7 @@ font-weight: bold;
 				<li>Apache Tomcat v9.0 사용
 				<li>Daum OpenApi 사용 (주소검색)</li>
 				<li>Maven 빌드툴 사용</li>
-				<li>현재 까지 제작 된 상태  로그인,회원가입, 게시판, 게시글작성, 수정, 삭제, 게시물 검색, 회원정보 수정 및 탈퇴  </li>
+				<li>현재 까지 제작 된 상태  로그인,회원가입, 게시판, 게시글작성, 댓글,  수정, 삭제, 게시물 검색, 회원정보 수정 및 탈퇴  </li>
 				<li>그 이외에 추가 개발예정 (자료실[업로드, 다운로드] , 카카오,네이버 로그인(api활용), 필요에 의한 open api 사용, 웹소켓 실시간 채팅 및 연동구현 )</li>
 			</ul>
 			</div>
@@ -76,11 +78,10 @@ font-weight: bold;
 			<br><br><br><br><br><br>
 			
 		</div>
-	</div>
 </div>
-</main>
-<footer style="height: 50px;">
-<%@ include file="common/footer.jsp" %>
+<br>
+<footer>
+	<%@ include file="common/footer.jsp" %>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -89,4 +90,5 @@ font-weight: bold;
 
 </script>
 </body>
+>
 </html>

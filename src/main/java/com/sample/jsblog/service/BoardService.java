@@ -19,4 +19,10 @@ public interface BoardService {
 	List<Board> search(String boardTitle);
 	
 	void viewCount(int boardNo);
+	
+	void insertSubboard(Board board);
+	
+	List<Board> subBoardlist();
+	
+	List<Board> selectsubboard(String boardNo);
 }

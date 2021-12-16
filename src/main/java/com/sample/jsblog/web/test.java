@@ -23,6 +23,7 @@ public class test {
 		Scanner s = new Scanner(System.in);
 		System.out.println("이름 입력");
 		s.next();
+		System.out.println(s);
 		
 		
 		

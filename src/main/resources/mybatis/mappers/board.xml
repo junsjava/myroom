@@ -4,7 +4,7 @@
 
 	<insert id="insertBoardarea" parameterType="com.sample.jsblog.vo.Board">
 		insert into jsblog_board
-		( board_no, board_title, board_area, user_id )
+		(board_no, board_title, board_area, user_id )
 		values
 		(jsblog_seq.nextval,#{boardTitle},#{boardArea},#{userId})
 	</insert>
@@ -28,7 +28,8 @@
 			board_title boardTitle,
 			board_area boardArea,
 			board_create_day createDate,
-			user_id userId 
+			user_id userId
+			 
 		from 
 			jsblog_board
 		where
@@ -81,5 +82,30 @@
 		from
 			jsblog_board
 		order by boardNo DESC
+	</select>
+	
+	<insert id="insertSubBoard" parameterType="com.sample.jsblog.vo.Board">
+		insert into jsblog_subBoard
+			(no, sub_board, user_id, board_No)
+			values
+			(jsblogsub_seq.nextval, #{subBoard}, #{userId}, #{boardNo})
+	</insert>
+	
+	<select id="subBoardlist" resultType="com.sample.jsblog.vo.Board">
+		select 
+			board_no boardNo,
+			sub_board subBoard,
+			sub_board_create_day createDate
+		from jsblog_subboard
+	</select>
+	
+	<select id="selectsubboard" resultType="com.sample.jsblog.vo.Board" parameterType="String">
+	select 
+		s.sub_board subBoard ,s.user_Id userId, j.board_no boardNo, s.no no, s.sub_board_create_day createDate
+	from 
+		jsblog_board j , jsblog_subboard s
+	where
+		j.board_no =#{boardNo} and s.board_no=#{boardNo}
+	order by s.no asc
 	</select>
 </mapper>

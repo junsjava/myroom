@@ -14,11 +14,11 @@
 	<h2>회원 리스트</h2>
 	<div id="ajax">
 	<button id="userlist"class="btn btn-primary">회원리스트 불러오기</button>
-	<button onclick="del()">리스트 삭제</button>
+	<button class='btn btn-secondary' onclick="del()">리스트 삭제</button>
 		<table class="table table">
 			<thead>
 			<tr>
-				<th>리스트</th>
+				<th>회원 아이디</th>
 			</tr>
 			</thead>
 			<tbody id="h">
@@ -89,7 +89,7 @@ $('#a').click(function (){
 			
 			var item = ""
 				item += "<ol>"
-				item += "<li>"+user+"</li>"
+				item += "<li>"+user.userId+"</li>"
 				item +="</ol>"
 				$(b).append(item)
 			})	

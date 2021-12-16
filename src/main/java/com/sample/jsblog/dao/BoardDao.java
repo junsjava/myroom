@@ -42,4 +42,10 @@ public interface BoardDao {
 	void viewCount(int boardNo);
 	
 	List<Board> selectBoardNo() throws Exception;
+	
+	void insertSubBoard(Board board);
+	
+	List<Board> subBoardlist();
+	
+	List<Board> selectsubboard(String board);
 }

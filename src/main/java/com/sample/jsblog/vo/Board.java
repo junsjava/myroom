@@ -16,6 +16,8 @@ public class Board {
 	private String userId;
 	private Integer viewCount;
 	private Date createDate;
+	private String subBoard;
+	private String no;
 	
 	public Integer getViewCount() {
 		return viewCount;

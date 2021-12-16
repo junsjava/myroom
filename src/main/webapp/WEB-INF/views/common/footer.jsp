@@ -11,9 +11,10 @@ background : darkgray;
 position: fixed;
 text-align:center;
 left:0;
-bottom:0;
+bottom: 0px;
 width: 100%;
-}
+
+} 
 #a>p{
 	margin-bottom: 1px;
 }

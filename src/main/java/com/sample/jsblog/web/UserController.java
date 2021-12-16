@@ -26,12 +26,12 @@ import com.sample.jsblog.vo.User;
 @Controller
 public class UserController {
 	
-	@Autowired
-	UserService userService;
+	@Autowired UserService userService;
 	
 	@Autowired BoardService boardService;
 	
 	@Autowired JsonView jsonView;
+	
 	
 	@GetMapping("/login")
 	public String login() {
@@ -134,7 +134,7 @@ public class UserController {
 	}
 	
 	// 아이디 중복 검사
-	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
+	@RequestMapping(value="/memberIdChk", method = RequestMethod.POST)
 	@ResponseBody
 	public String memberIdChkPOST(String userId) throws Exception{
 		int result = userService.idCheck(userId);

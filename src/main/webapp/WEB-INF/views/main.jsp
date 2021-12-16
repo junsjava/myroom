@@ -9,7 +9,6 @@
 <script src="https://kit.fontawesome.com/496bb7aab6.js" crossorigin="anonymous"></script>
 <title>JS Blog</title>
 <style type="text/css">
-
 #a{
 	text-align: center;
  
@@ -22,7 +21,7 @@
 </head>
 <body>
 <%@ include file="common/header.jsp" %>
-<img alt="테스트용" src="/resources/css/img/ScreenShot_21-08-22_15-10-30-000.jpg" width="100%" height="250px">
+<!-- <img alt="테스트용" src="/resources/css/img/ScreenShot_21-08-22_15-10-30-000.jpg" width="100%" height="250px"> -->
 <div class="container my-3">
 	<c:choose>
 		<c:when test="${empty LOGINED_USER }">
@@ -40,21 +39,30 @@
 		<table class="table">
 	<thead>
 		<tr>
-			<td>번호</td>
-			<td>제목</td>
+			<td width="20%">번호</td>
+			<td width="50%">제목</td>
 			<td>작성일</td>
 			<td>작성자</td>
 		</tr>
 	</thead>
 	<tbody>
+		<c:choose>
+		<c:when test="${!empty list }">
 		<c:forEach var="lists" items="${list }" varStatus="status">
 		<tr>
-			<td>${status.count }</td>
-			<td><a href="boardview?boardNo=${lists.boardNo }">${lists.boardTitle }</a></td>
+			<td width="20%">${status.count }</td>
+			<td width="50%"><a href="boardview?boardNo=${lists.boardNo }">${lists.boardTitle }</a></td>
 			<td><fmt:formatDate value="${lists.createDate }" pattern="yyyy/MM/dd"/></td>
 			<td>${lists.userId }</td>
 		</tr>
 		</c:forEach>
+		</c:when>
+		<c:otherwise>
+			<tr>
+				<td colspan="4" style="text-align: center;">게시물이 없습니다</td>
+			</tr>
+		</c:otherwise>
+		</c:choose>
 	</tbody>
 </table>
 <%--
@@ -101,6 +109,7 @@
 		</c:otherwise>
 	</c:choose>
 </div>
+<Br><Br><Br><Br>
 <footer>
 <%@ include file="common/footer.jsp" %>
 </footer>

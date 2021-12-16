@@ -42,7 +42,7 @@ input[type=password], select {
 		<div>아이디 <input  type="text" id="user-Id" name="userId" placeholder="아이디를 입력하세요"></div>
 		<div>패스워드<input type="password" id="user-Password" name="userPassword" placeholder="비밀번호를 입력하세요"></div>
 		<div style="float: right; margin-top: 35px;">
-		<a href="register" class="btn btn-primary">회원가입</a>
+		<a href="register" class="btn btn-primary" id="re">회원가입</a>
 		<button class="btn btn-primary" type="submit">로그인</button>
 		</div>
 	</div>	
@@ -70,6 +70,9 @@ $(function() {
 		return ture;
 	});
 	
+})
+$('#re').click(function(){
+	alert('회원가입 페이지로 이동합니다');
 })
 </script>
 </body>

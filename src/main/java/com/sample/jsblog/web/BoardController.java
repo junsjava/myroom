@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sample.jsblog.service.BoardService;
+import com.sample.jsblog.view.JsonView;
 import com.sample.jsblog.vo.Board;
 
 @Controller
 public class BoardController {
 	@Autowired BoardService boardSerivce;
+	
+	@Autowired JsonView jsonView;
 
 	@GetMapping("board")
 	public String board(Model model) {
@@ -50,6 +55,9 @@ public class BoardController {
 	@GetMapping("boardview")
 	public String boardview(@RequestParam("boardNo")String boardNo, Model model) {
 		Board boardview =boardSerivce.getBoardViewNo(boardNo);
+		List<Board> sub = boardSerivce.selectsubboard(boardNo);
+		model.addAttribute("boardNo",boardNo);
+		model.addAttribute("subitem", sub);
 		model.addAttribute("boardview",boardview);
 		System.out.println(boardNo);
 		return "/comunity/boardview";
@@ -123,7 +131,29 @@ public class BoardController {
 		List<Board> boardList = boardSerivce.getBoardList();
 
 	    model.addAttribute("boardList", boardList);
+	    model.addAttribute("boardList", a);
 	    
 	    return "comunity/board";
+	}
+	
+	@RequestMapping(value="/subBoard", method=RequestMethod.GET)
+	public ModelAndView subBoard(@RequestParam("subB") String subBoard,
+			@RequestParam(/* value = */"userId"/* ,required=false */)String userId, @RequestParam("boardNo")String boardNo) {
+		//게시판 테이블에 댓글 컬러 하나 추가해서 내용 받을수잇게 작업해야함
+		
+		Board sub = new Board();
+		
+		sub.setSubBoard(subBoard);
+		sub.setUserId(userId);
+		sub.setBoardNo(boardNo);
+		boardSerivce.insertSubboard(sub);
+		//insert작업 이루어진뒤에 반환값 json으로 반환 작업 필요
+		List<Board> list = boardSerivce.selectsubboard(boardNo);
+		ModelAndView mav = new ModelAndView();;
+		System.out.println(list+"여기");
+		mav.addObject("data", list);
+		mav.setView(jsonView);
+		//페이지에 댓글 보이게 param 값 전송 작업해야함  예를들어 select 를 하나 더만들ㄹ어서 데이터값 뿌려지게 ?
+		return mav;
 	}
 }

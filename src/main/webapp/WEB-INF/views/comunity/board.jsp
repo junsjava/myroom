@@ -22,14 +22,23 @@
 		</tr>
 	</thead>
 	<tbody>
+	<c:choose>
+	<c:when test="${!empty boardList }">
 		<c:forEach var="list" items="${boardList }" varStatus="a">
 			<tr>
 				<td>${a.count }</td>
-				<td><a href="boardview?boardNo=${list.boardNo }">${list.boardTitle }</a></td>
+				<td><a href="boardview?boardNo=${list.boardNo }&userId=${LOGINED_USER.userId }">${list.boardTitle }</a></td>
 				<td><button class="btn btn-link btn-sm" data-user-id="${list.userId }">${list.userId }</button></td>
 				<td><fmt:formatDate value="${list.createDate }" pattern="yyyy/MM/dd"/> </td>
 			</tr>	
 		</c:forEach>
+	</c:when>
+	<c:otherwise>
+		<tr>
+			<td colspan='4' style="text-align: center;">게시물이 없습니다.</td>
+		</tr>
+	</c:otherwise>
+	</c:choose>
 	</tbody>
 </table>
 <span style="float: right;"><a class="btn btn-primary" href="boardcreate">게시글작성</a></span>	
@@ -68,8 +77,8 @@
 			</div>
 		</div>
 </div>
-<%@ include file="../common/footer.jsp" %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<%@ include file="../common/footer.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(function(){

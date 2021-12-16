@@ -50,4 +50,21 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.viewCount(boardNo);
 		
 	}
+	@Override
+	public void insertSubboard(Board board) {
+		boardDao.insertSubBoard(board);
+		
+	}
+	
+	@Override
+	public List<Board> subBoardlist() {
+		return boardDao.subBoardlist();
+	}
+	
+	@Override
+	public List<Board> selectsubboard(String boardNo) {
+		// TODO Auto-generated method stub
+		return boardDao.selectsubboard(boardNo);
+	}
+
 }
